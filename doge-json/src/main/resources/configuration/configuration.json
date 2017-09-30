@@ -1,0 +1,34 @@
+{
+  "baseInfo": {
+    "author": "throwable",
+    "contact": "739805340@qq.com",
+    "projectUrl": "http://www.github.com/zjcscut/doge-tools",
+    "version": "1.0-SNAPSHOT"
+  },
+  "helpModule": {
+    "description": "Help",
+    "helps": [
+      {
+        "key": "Ctrl + S",
+        "description": "Save"
+      },
+      {
+        "key": "Ctrl + P",
+        "description": "Pretty json"
+      },
+      {
+        "key": "Ctrl + M",
+        "description": "Minify json"
+      },
+      {
+        "key": "Ctrl + F",
+        "description": "Search"
+      },
+      ,
+      {
+        "key": "Ctrl + H",
+        "description": "Help"
+      }
+    ]
+  }
+}

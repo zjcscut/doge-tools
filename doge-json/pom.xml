@@ -17,6 +17,13 @@
             <version>1.2.38</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.fxmisc.richtext</groupId>
+            <artifactId>richtextfx</artifactId>
+            <version>0.7-M5</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>doge-json</finalName>
@@ -31,6 +38,12 @@
                 <directory>src/main</directory>
                 <includes>
                     <include>**/*.jpg</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main</directory>
+                <includes>
+                    <include>**/*.json</include>
                 </includes>
             </resource>
         </resources>

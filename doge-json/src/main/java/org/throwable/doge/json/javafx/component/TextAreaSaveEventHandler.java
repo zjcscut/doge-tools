@@ -1,6 +1,9 @@
-package org.throwable.doge.json.support;
+package org.throwable.doge.json.javafx.component;
 
 import javafx.scene.control.TextArea;
+import org.throwable.doge.json.support.FileChooserHelper;
+import org.throwable.doge.json.support.JavafxKeyCombinationFactory;
+import org.throwable.doge.json.support.KeyCombinationPressedEventHandler;
 
 /**
  * @author throwable
