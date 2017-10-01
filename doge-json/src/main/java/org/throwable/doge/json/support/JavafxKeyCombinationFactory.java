@@ -21,12 +21,12 @@ public abstract class JavafxKeyCombinationFactory {
 	public static final KeyCombination CONTROL_M = new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_ANY);
 	public static final KeyCombination CONTROL_H = new KeyCodeCombination(KeyCode.H, KeyCombination.CONTROL_ANY);
 	public static final KeyCombination CONTROL_P = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_ANY);
+	public static final KeyCombination CONTROL_N = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_ANY);
 
 	private static final Map<KeyCombination, KeyCombinationPressedEventHandler> HANDLERS_MAP = new ConcurrentHashMap<>();
 
 	public static void register(KeyCombination keyCombination, KeyCombinationPressedEventHandler eventHandler) {
-		HANDLERS_MAP.putIfAbsent(keyCombination, eventHandler);
-		eventHandler.registerEvent();
+		HANDLERS_MAP.put(keyCombination, eventHandler);
 	}
 
 	public static void process(KeyEvent keyEvent) {

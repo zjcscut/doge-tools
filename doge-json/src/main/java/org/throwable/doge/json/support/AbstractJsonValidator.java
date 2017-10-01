@@ -6,7 +6,7 @@ package org.throwable.doge.json.support;
  * @description
  * @since 2017/9/30 0:58
  */
-public abstract class AbstactJsonValidator {
+public abstract class AbstractJsonValidator {
 
 	protected abstract boolean validate(String value);
 
@@ -14,7 +14,7 @@ public abstract class AbstactJsonValidator {
 		try {
 			return validate(value);
 		} catch (Exception e) {
-			AlertHelper.createExceptionAlert(e, "抛异常了，可怕", "Json校验失败，可怕，你输入的是一个烂的json!");
+			AlertViewFactory.createExceptionAlert(e, "抛异常了，可怕", "Json校验失败，可怕，你输入的是一个烂的json!");
 		}
 		return false;
 	}

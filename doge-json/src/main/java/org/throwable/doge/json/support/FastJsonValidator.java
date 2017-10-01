@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSON;
  * @description
  * @since 2017/9/30 0:33
  */
-public class FastJsonValidator extends AbstactJsonValidator {
+public class FastJsonValidator extends AbstractJsonValidator {
 
 	@Override
 	protected boolean validate(String value) {

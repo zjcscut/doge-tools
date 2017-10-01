@@ -18,26 +18,25 @@ import java.io.PrintStream;
  */
 public abstract class FileChooserHelper {
 
-	public static File processSaveFileByTextContent(String value) {
+	public static void processSaveFileByTextContent(String value) {
 		Stage stage = new Stage();
-		stage.setMaxHeight(Constants.DEFAULT_STAGE_HEIGHT);
-		stage.setMaxWidth(Constants.DEFAULT_STAGE_WIDTH);
+		stage.setMaxHeight(Constants.DEFAULT_ALERT_HEIGHT);
+		stage.setMaxWidth(Constants.DEFAULT_ALERT_WIDTH);
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save operation");
 		fileChooser.setInitialDirectory(new File(Constants.DEFAULT_OUTPUT_PATH));
 		File file = fileChooser.showSaveDialog(stage);
 		if (null != file) {
-			try (PrintStream printStream = new PrintStream(new FileOutputStream(file))){
+			try (PrintStream printStream = new PrintStream(new FileOutputStream(file))) {
 				printStream.print(value);
 				printStream.flush();
 			} catch (Exception e) {
-				Alert error = AlertHelper.createAlert(Alert.AlertType.ERROR,
+				Alert error = AlertViewFactory.createAlert(Alert.AlertType.ERROR,
 						"保存文件", "保存文件", "保存文件异常!");
 				error.showAndWait();
 				throw new FileChooserException(e);
 			}
 		}
-		return null;
 	}
 
 }

@@ -10,5 +10,4 @@ public interface KeyCombinationPressedEventHandler {
 
 	void handle();
 
-	void registerEvent();
 }

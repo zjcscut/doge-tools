@@ -6,7 +6,7 @@
     "version": "1.0-SNAPSHOT"
   },
   "helpModule": {
-    "description": "Help",
+    "description": "Help:",
     "helps": [
       {
         "key": "Ctrl + S",
@@ -24,10 +24,22 @@
         "key": "Ctrl + F",
         "description": "Search"
       },
-      ,
       {
         "key": "Ctrl + H",
         "description": "Help"
+      }
+    ]
+  },
+  "dependenceModule": {
+    "description": "Dependence:",
+    "dependencies": [
+      {
+        "dependence": "jdk",
+        "version": "1.8"
+      },
+      {
+        "dependence": "fastJson",
+        "version": "1.2.38"
       }
     ]
   }

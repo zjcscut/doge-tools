@@ -1,6 +1,7 @@
 package org.throwable.doge.json.support;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
@@ -14,7 +15,12 @@ public abstract class JsonFormatHelper {
 
 	public static String prettyToJsonFormat(String value) {
 		Object jsonObject = JSON.parse(value, Feature.AllowSingleQuotes);
-		return JSON.toJSONString(jsonObject, SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
+		return JSON.toJSONString(jsonObject, SerializerFeature.WriteMapNullValue,
+				SerializerFeature.PrettyFormat);
+	}
+
+	public static JSONObject parseToJsonObject(String value) {
+		return JSON.parseObject(value, Feature.AllowSingleQuotes);
 	}
 
 	public static String minifyJson(String json) {

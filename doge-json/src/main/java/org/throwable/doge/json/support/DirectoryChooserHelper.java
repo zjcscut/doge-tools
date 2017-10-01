@@ -21,8 +21,8 @@ public abstract class DirectoryChooserHelper {
 	public static String chooseOutputPath() {
 		String defaultOutputPath = Constants.DEFAULT_OUTPUT_PATH;
 		Stage stage = new Stage();
-		stage.setMaxHeight(Constants.DEFAULT_STAGE_HEIGHT);
-		stage.setMaxWidth(Constants.DEFAULT_STAGE_WIDTH);
+		stage.setMaxHeight(Constants.DEFAULT_ALERT_HEIGHT);
+		stage.setMaxWidth(Constants.DEFAULT_ALERT_WIDTH);
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		directoryChooser.setTitle("Choose save path");
 		directoryChooser.setInitialDirectory(new File(defaultOutputPath));
@@ -32,7 +32,7 @@ public abstract class DirectoryChooserHelper {
 				try {
 					Constants.DESKTOP.open(file);
 				} catch (IOException e) {
-					Alert error = AlertHelper.createAlert(Alert.AlertType.ERROR,
+					Alert error = AlertViewFactory.createAlert(Alert.AlertType.ERROR,
 							"打开文件搜索器异常", "打开文件搜索器异常", "打开文件搜索器异常");
 					error.showAndWait();
 					throw new DirectoryChooserException(e);
