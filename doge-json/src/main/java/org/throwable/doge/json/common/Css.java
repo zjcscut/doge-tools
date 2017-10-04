@@ -15,5 +15,6 @@ public interface Css {
 	String FILL_BLUE = "-fx-fill: blue";
 	String FILL_GREEN = "-fx-fill: green";
 
-	//
+	//highlight color
+	String HIGHLIGHT_YELLOW = "-fx-fill: gold";
 }

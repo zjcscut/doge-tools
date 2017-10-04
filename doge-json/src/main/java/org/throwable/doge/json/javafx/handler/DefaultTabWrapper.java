@@ -8,6 +8,7 @@ import javafx.scene.layout.Priority;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.throwable.doge.json.common.Constants;
+import org.throwable.doge.json.common.model.JsonTableEntity;
 import org.throwable.doge.json.javafx.component.InlineCssTextAreaBuilder;
 import org.throwable.doge.json.javafx.component.TableViewBuilder;
 import org.throwable.doge.json.javafx.component.TreeViewBuilder;
@@ -35,10 +36,9 @@ public class DefaultTabWrapper implements TabWrapper {
 		HBox.setHgrow(virtualizedScrollPane, Priority.ALWAYS);
 		hBox.getChildren().add(virtualizedScrollPane);
 		//create table view
-		TableView tableView = TableViewBuilder.createTableView();
+		TableView<JsonTableEntity> tableView = TableViewBuilder.createTableView();
 		HBox.setHgrow(tableView, Priority.ALWAYS);
 		hBox.getChildren().add(tableView);
 		tab.setContent(hBox);
 	}
-
 }

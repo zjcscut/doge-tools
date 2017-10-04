@@ -14,7 +14,7 @@ public class JsonTableEntity {
 	private final SimpleStringProperty value;
 	private final SimpleStringProperty type;
 
-	public JsonTableEntity(String key, String value,String type) {
+	public JsonTableEntity(String key, String value, String type) {
 		this.key = new SimpleStringProperty(key);
 		this.value = new SimpleStringProperty(value);
 		this.type = new SimpleStringProperty(type);

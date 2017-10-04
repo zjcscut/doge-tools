@@ -17,6 +17,8 @@ import static org.throwable.doge.json.common.Css.*;
  */
 public abstract class JsonShaderEditor {
 
+	//0
+	private static final Pattern ALL_PATTERN = Pattern.compile("\\d+");
 	//1
 	private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 	//2

@@ -35,12 +35,15 @@ public class DogeJsonApplication extends Application {
 		String result = JsonFormatHelper.prettyToJsonFormat(json);
 		textArea.replaceText(0, 0, result);
 		textArea.setStyle("-fx-font-size: 18;-fx-font-family: consolas;-fx-border-style: solid;-fx-border-width: 2px");
+//		textArea.setStyle("-fx-background-color: deeppink");
+//		textArea.setStyle("-fx-fill: gold;-fx-background-color: gold");
 		List<JsonShaderEditor.ShaderColorResult> shaderColorResults = JsonShaderEditor.shadeColorForJson(result);
 		if (!shaderColorResults.isEmpty()) {
 			for (JsonShaderEditor.ShaderColorResult shaderColorResult : shaderColorResults) {
 				textArea.setStyle(shaderColorResult.getFrom(), shaderColorResult.getTo(), shaderColorResult.getFillColor());
 			}
 		}
+		textArea.setStyle(0,20,"-fx-background-color: gold; -fx-fill: gold;");
 		StackPane root = new StackPane();
 		root.getChildren().add(textArea);
 		Scene scene = new Scene(root, 300, 250);

@@ -3,10 +3,13 @@ package org.throwable.doge.json.javafx.component;
 import com.alibaba.fastjson.JSONObject;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.HBox;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
+import org.throwable.doge.json.common.model.JsonTableEntity;
+import org.throwable.doge.json.common.model.TreeViewEntity;
 import org.throwable.doge.json.javafx.handler.DefaultTabWrapper;
 import org.throwable.doge.json.javafx.handler.SceneStageEventHandler;
 import org.throwable.doge.json.javafx.handler.TabPaneAddTabEventHandler;
@@ -27,6 +30,7 @@ public abstract class TabPaneBuilder {
 
 	private static final TabWrapper WRAPPER = new DefaultTabWrapper();
 	private static final AtomicReference<Tab> tabSelected = new AtomicReference<>(null);
+	public static final AtomicReference<TabColorResultHolder> tabColorResult = new AtomicReference<>(null);
 	private static final FastJsonValidator VALIDATOR = new FastJsonValidator();
 
 	public static TabPane createTabPane() {
@@ -62,11 +66,13 @@ public abstract class TabPaneBuilder {
 		Tab selectedTab = tabSelected.get();
 		if (null != selectedTab) {
 			HBox hBox = (HBox) selectedTab.getContent();
-			TreeView<String> treeView = (TreeView<String>) hBox.getChildren().get(0);
+			TreeView<TreeViewEntity> treeView = (TreeView<TreeViewEntity>) hBox.getChildren().get(0);
 			InlineCssTextArea textArea = ((VirtualizedScrollPane<InlineCssTextArea>) hBox.getChildren().get(1)).getContent();
+			TableView<JsonTableEntity> tableView = (TableView<JsonTableEntity>) hBox.getChildren().get(2);
 			registerInlineCssTextAreaSaveEventAction(textArea);
-			registerInlineCssTextAreaJsonPrettyEventAction(textArea, treeView);
+			registerInlineCssTextAreaJsonPrettyEventAction(textArea, treeView, tableView);
 			registerInlineCssTextAreaJsonMinifyEventAction(textArea);
+			registerSearchDialogEventAction(selectedTab, textArea, tabColorResult);
 		}
 	}
 
@@ -75,7 +81,9 @@ public abstract class TabPaneBuilder {
 		JavafxKeyCombinationFactory.register(JavafxKeyCombinationFactory.CONTROL_S, handler);
 	}
 
-	private static void registerInlineCssTextAreaJsonPrettyEventAction(InlineCssTextArea textArea, TreeView<String> treeView) {
+	private static void registerInlineCssTextAreaJsonPrettyEventAction(InlineCssTextArea textArea,
+																	   TreeView<TreeViewEntity> treeView,
+																	   TableView<JsonTableEntity> tableView) {
 		KeyCombinationPressedEventHandler handler = () -> {
 			String value = textArea.getText();
 			if (StringUtils.isNotBlank(value) && VALIDATOR.wrapValidate(value)) {
@@ -84,20 +92,23 @@ public abstract class TabPaneBuilder {
 				textArea.clear();
 				textArea.replaceText(json);
 				List<JsonShaderEditor.ShaderColorResult> shaderColorResults = JsonShaderEditor.shadeColorForJson(json);
+				tabColorResult.compareAndSet(null, new TabColorResultHolder(tabSelected.get(), shaderColorResults));
 				if (!shaderColorResults.isEmpty()) {
 					for (JsonShaderEditor.ShaderColorResult shaderColorResult : shaderColorResults) {
 						textArea.setStyle(shaderColorResult.getFrom(), shaderColorResult.getTo(), shaderColorResult.getFillColor());
 					}
 				}
-				registerTreeViewResetEventAction(treeView, jsonObject);
+				registerTreeViewResetEventAction(treeView, jsonObject, tableView);
 			}
 		};
 		JavafxKeyCombinationFactory.register(JavafxKeyCombinationFactory.CONTROL_P, handler);
 	}
 
-	private static void registerTreeViewResetEventAction(TreeView<String> treeView, JSONObject jsonObject) {
+	private static void registerTreeViewResetEventAction(TreeView<TreeViewEntity> treeView,
+														 JSONObject jsonObject,
+														 TableView<JsonTableEntity> tableView) {
 		//override to reset root item
-		JsonTreeViewParser.parseJsonObjectToTreeViewRootItem(treeView, jsonObject);
+		JsonTreeViewParser.parseJsonObjectToTreeViewRootItem(treeView, jsonObject, tableView);
 	}
 
 	private static void registerInlineCssTextAreaJsonMinifyEventAction(InlineCssTextArea textArea) {
@@ -110,5 +121,39 @@ public abstract class TabPaneBuilder {
 			}
 		};
 		JavafxKeyCombinationFactory.register(JavafxKeyCombinationFactory.CONTROL_M, handler);
+	}
+
+	private static void registerSearchDialogEventAction(Tab selectedTab,
+														InlineCssTextArea textArea,
+														AtomicReference<TabColorResultHolder> tabColorResultHolder) {
+		SearchDialogBuilder.createAndShowSearchDialog(selectedTab, textArea, tabColorResultHolder);
+	}
+
+	public static class TabColorResultHolder {
+
+		private Tab tab;
+		private List<JsonShaderEditor.ShaderColorResult> colorResults;
+
+		public TabColorResultHolder(Tab tab,
+									List<JsonShaderEditor.ShaderColorResult> colorResults) {
+			this.tab = tab;
+			this.colorResults = colorResults;
+		}
+
+		public Tab getTab() {
+			return tab;
+		}
+
+		public void setTab(Tab tab) {
+			this.tab = tab;
+		}
+
+		public List<JsonShaderEditor.ShaderColorResult> getColorResults() {
+			return colorResults;
+		}
+
+		public void setColorResults(List<JsonShaderEditor.ShaderColorResult> colorResults) {
+			this.colorResults = colorResults;
+		}
 	}
 }
