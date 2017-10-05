@@ -51,6 +51,18 @@
                     <include>**/*.json</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main</directory>
+                <includes>
+                    <include>**/*.html</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main</directory>
+                <includes>
+                    <include>**/*.js</include>
+                </includes>
+            </resource>
         </resources>
     </build>
 </project>
