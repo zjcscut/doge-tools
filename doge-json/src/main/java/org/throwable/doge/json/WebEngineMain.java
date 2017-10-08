@@ -54,7 +54,7 @@ public class WebEngineMain extends Application {
 		hideImages.setOnAction(e -> System.out.println("Hide Images..."));
 		contextMenu.getItems().addAll(reload, savePage, hideImages);
 		webView.setOnMousePressed(e -> {
-			if (e.getButton() == MouseButton.PRIMARY) {
+			if (e.getButton() == MouseButton.SECONDARY) {
 				contextMenu.show(webView, e.getScreenX(), e.getScreenY());
 			} else {
 				contextMenu.hide();

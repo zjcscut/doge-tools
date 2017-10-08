@@ -63,6 +63,12 @@
                     <include>**/*.js</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main</directory>
+                <includes>
+                    <include>**/*.css</include>
+                </includes>
+            </resource>
         </resources>
     </build>
 </project>

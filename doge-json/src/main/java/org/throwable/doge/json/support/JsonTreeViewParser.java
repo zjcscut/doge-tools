@@ -8,15 +8,12 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import org.throwable.doge.json.common.TreeViewItemType;
 import org.throwable.doge.json.common.model.JsonTableEntity;
 import org.throwable.doge.json.common.model.TreeViewEntity;
 import org.throwable.doge.json.javafx.component.ImageViewBuilder;
-import org.throwable.doge.json.utils.StringUtils;
 
 import java.util.Collections;
 import java.util.List;

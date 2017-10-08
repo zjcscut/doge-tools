@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>doge-json</module>
+        <module>doge-zookeeper</module>
     </modules>
     <name>doge-tools</name>
     <dependencies>

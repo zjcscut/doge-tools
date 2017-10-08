@@ -18,8 +18,7 @@ public class MainController extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		ViewController viewController = new ViewController();
-		Scene scene = new Scene(viewController.initViewsAndReturnRoot(), -1,
-				-1);
+		Scene scene = new Scene(viewController.initViewsAndReturnRoot(), -1, -1);
 		stage.setTitle(Constants.DEFAULT_PRODUCT_NAME);
 		stage.getIcons().add(new Image(MainController.class.getResourceAsStream(Constants.DEFAULT_LOGO_PATH)));
 		stage.setScene(scene);
