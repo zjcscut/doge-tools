@@ -35,7 +35,7 @@ public class MainTest {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
         this.curatorFramework =
                 CuratorFrameworkFactory.builder()
-                        .connectString(testingServer.getConnectString())
+                        .connectString("localhost:2181")
                         .sessionTimeoutMs(5000)
                         .connectionTimeoutMs(5000)
                         .retryPolicy(retryPolicy)
@@ -56,11 +56,15 @@ public class MainTest {
 
         curatorFramework.setACL().withACL(ZooDefs.Ids.READ_ACL_UNSAFE).forPath("/path");
 
-        List<String> childPaths = curatorFramework.getChildren().forPath("/path");
+        List<String> childPaths = curatorFramework.getChildren().forPath("/");
+		System.out.println(childPaths);
+        childPaths = curatorFramework.getChildren().forPath("/zookeeper");
         System.out.println(childPaths);
+		childPaths = curatorFramework.getChildren().forPath("/zookeeper/quota");
+		System.out.println(childPaths);
+        byte[] d = curatorFramework.getData().forPath("/zookeeper/quota");
+ 		System.out.println(new String(d));
 
-        TreeView<TreeViewNode> nodeTreeView = new TreeView<>();
-        ZookeeperNodeTreeViewParser.parseZookeeperNodeTreeView(nodeTreeView, curatorFramework);
         System.out.println("success");
     }
 

@@ -36,7 +36,7 @@ public class TreeViewMain extends Application {
 		RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
 		CuratorFramework curatorFramework =
 				CuratorFrameworkFactory.builder()
-						.connectString(testingServer.getConnectString())
+						.connectString("localhost:2181")
 						.sessionTimeoutMs(5000)
 						.connectionTimeoutMs(5000)
 						.retryPolicy(retryPolicy)

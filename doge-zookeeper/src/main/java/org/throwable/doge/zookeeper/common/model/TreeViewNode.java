@@ -37,4 +37,9 @@ public class TreeViewNode {
     public void setContent(TreeViewContent content) {
         this.content = content;
     }
+
+	@Override
+	public String toString() {
+		return currentPath;
+	}
 }
